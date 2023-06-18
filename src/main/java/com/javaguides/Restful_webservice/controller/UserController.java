@@ -1,5 +1,6 @@
 package com.javaguides.Restful_webservice.controller;
 
+import com.javaguides.Restful_webservice.dto.UserDto;
 import com.javaguides.Restful_webservice.entity.User;
 import com.javaguides.Restful_webservice.service.UserService;
 import jakarta.persistence.Id;
@@ -18,18 +19,18 @@ import java.util.List;
 public class UserController {
     private UserService userService;
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user ){
-        User savedUser= userService.CreateUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user ){
+        UserDto savedUser= userService.CreateUser(user);
         return new ResponseEntity<>(savedUser , HttpStatus.CREATED);
     }
     @GetMapping("{id}")
-    public  ResponseEntity<User> findUserByid(@PathVariable("id") Long userid){
-       User user= userService.getUserByidd(userid);
+    public  ResponseEntity<UserDto> findUserByid(@PathVariable("id") Long userid){
+       UserDto user= userService.getUserByidd(userid);
        return new ResponseEntity<> (user, HttpStatus.OK);
     }
     @GetMapping
-    public  ResponseEntity<List<User>> findAll(User user){
-        List<User> users=userService.getAllUsers();
+    public  ResponseEntity<List<UserDto>> findAll(User user){
+        List<UserDto> users=userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
     @PutMapping("{id}")
