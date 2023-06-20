@@ -34,11 +34,11 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
     @PutMapping("{id}")
-    public ResponseEntity<User> updateByid(@PathVariable("id") Long userid,
-                                           @RequestBody User user){
+    public ResponseEntity<UserDto> updateByid(@PathVariable("id") Long userid,
+                                           @RequestBody UserDto user){
         user.setId(userid);
-            User updateduser=userService.updateUserByid(user);
-            return new ResponseEntity<>(updateduser,HttpStatus.OK);
+            UserDto updatedUser=userService.updateUserByid(user);
+            return new ResponseEntity<>(updatedUser,HttpStatus.OK);
 
     }
     @DeleteMapping("{id}")
