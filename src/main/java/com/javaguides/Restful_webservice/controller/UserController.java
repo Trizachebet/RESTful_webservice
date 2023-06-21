@@ -6,10 +6,12 @@ import com.javaguides.Restful_webservice.exception.ErrorDetail;
 import com.javaguides.Restful_webservice.exception.ResourceNotFoundException;
 import com.javaguides.Restful_webservice.service.UserService;
 import jakarta.persistence.Id;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
@@ -23,7 +25,7 @@ import java.util.List;
 public class UserController {
     private UserService userService;
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user ){
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto user ){
         UserDto savedUser= userService.CreateUser(user);
         return new ResponseEntity<>(savedUser , HttpStatus.CREATED);
     }
@@ -39,7 +41,7 @@ public class UserController {
     }
     @PutMapping("{id}")
     public ResponseEntity<UserDto> updateByid(@PathVariable("id") Long userid,
-                                           @RequestBody UserDto user){
+                                           @RequestBody@Valid UserDto user){
         user.setId(userid);
             UserDto updatedUser=userService.updateUserByid(user);
             return new ResponseEntity<>(updatedUser,HttpStatus.OK);
