@@ -16,7 +16,7 @@ import lombok.Setter;
 
 public class UserDto {
     private Long id;
-    @NotEmpty(message = "Fisrt name should not null")
+    @NotEmpty(message = "First name should not null")
     private String firstName;
     @NotEmpty(message = "Last name should not be null")
     private String lastName;
